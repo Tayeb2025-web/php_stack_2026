@@ -103,7 +103,6 @@ if(isset($_POST['submit'])) {
 
 <body class="min-h-screen">
 
-
   <div class="container">
     <form class="form" action="add_raw.php" method="post">
       <h1 class="h1">Add Player</h1>
