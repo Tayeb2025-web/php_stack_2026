@@ -1,0 +1,76 @@
+
+   This is the One CRUD App with 5 different methods 
+          (all have the same result)
+
+1. ---->  PDO ❌  OOP ❌ Procedural (raw php) + mysqli
+2. ---->  PDO ✅  OOP ❌
+3. ---->  PDO ❌  OOP ✅ + mysqli
+4. ---->  PDO ✅  OOP ✅
+5. ---->  with the rest api --> just name different all the same 
+
+----------------------------------------------------------------------------------------------------------------
+
+ ♦️ In all of 5 methods we have these files:
+  |_ a  database file             (db.php)   [it should include in other pages]
+  |_ a  display page aka frontend (home.php) reading data is here [R]
+  |_ an insert page               (add.php)                       [C]
+  |_ an update page               (edit.php)                      [U]
+  |_ a  delete file               (delete.php)                    [D]
+
+note: in two OOP ways we have a new file (player_class.php)
+    all the crud methods is created here & later to use them we just make an instance of it aka object
+note2: if we have another table to do crud staff we should make an other class for that 
+        for ex user table --> (User_class.php)
+        and also 4 other files for crud [insert.php, update.php , delete.php , read in the frontend (login page)]
+        look for every table we make crud files ok not one for all.
+------------------------------------------------------------------------------------------------------------------
+
+  ♦️ What the hell is this bindParam in PDO & bind_param in mysqli: 😐
+     we can pass parameter in 2 ways and all are the same doing (? , :param)
+
+   # note-> :param is just for pdo not mysqli
+                   in mysqli we just have ?
+
+ one(?)  $query ="UPDATE tbname SET name = ? , team = ? where id =?";
+        |_ for type we put 's' for string & 'i' for integer Ex) $statement->bind_param('ssi' , $name , $team , $id);
+        |_ not considering type just put number Ex) $statement->bindParam(1 , $name);
+                                                    $statement->bindParam(2 , $team);
+                                                    $statement->bindParam(3 , $id);
+          or screw the bindParam do through the execute() with an array inside:
+             $statement->execute([$name , $team , $id]);
+
+ two(:paramter) $query ="UPDATE tbname SET name = :name , team =:team where id =:id";
+                EX) $statement->bindParam(':name' , $name);
+                    $statement->bindParam(':team' , $team);
+                    $statement->bindParam(':id' , $id);
+
+                    or screwing the bindParam:
+                    $statement->execute(['name'=>$name, 'team'=>$team, 'id'=>$id]);
+    
+
+# this type defining is just in mysqli 's' or 'i':
+  $stmt->bind_param("ssi", $name,$team,$id);
+
+    s = string , i = integer
+    d = double , b = blob
+
+   in pdo we mostly don't specify the type just this: $stmt->bindParam(':id', $id);
+      but if you want this is the way:                $stmt->bindParam(':id',  $id, PDO::PARAM_INT);
+------------------------------------------------------------------------------------------------------------------
+
+  ♦️ Don't get it wrong its mysqli ok not pdo
+        
+        pdo    => bindParam() or bindValue()
+        mysqli => bind_param()
+        "s" => string  "i" => integer
+         ? for mysqli  but both ? and :id for pdo
+
+         prepare() & execute() => are same for both(mysqli , pdo)🙂
+
+        Finally: in mysqli we also have these:
+                  |_ bind_param()
+                  |_ prepare()
+                  |_ execute()
+    -> these methods are just for security [sql injection]
+
+-------------------------------------------------------------------------------------------------
