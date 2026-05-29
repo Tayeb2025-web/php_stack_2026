@@ -265,4 +265,4 @@ Now when you learn Laravel, you'll understand where concepts like:
     ```
 actually come from, because you've already built them manually in PHP. 
 Laravel is simply organizing and automating the same ideas. 🚀
-------------------------------------------------------------------------
+-----------------------------------------------------------------------
